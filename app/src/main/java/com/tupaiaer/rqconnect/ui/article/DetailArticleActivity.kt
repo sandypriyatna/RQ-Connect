@@ -1,6 +1,8 @@
 package com.tupaiaer.rqconnect.ui.article
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.text.method.ScrollingMovementMethod
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -19,9 +21,14 @@ class DetailArticleActivity : AppCompatActivity() {
     private fun getDetailArticle() {
         val bundle = intent.extras
         tv_author_article.text = "ditulis oleh: ${bundle!!.getString("author")}"
-        tv_title_article.text = bundle.getString("title")
         tv_title_article2.text = bundle.getString("title")
-        tv_blog_article.text = bundle.getString("blog")
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tv_blog_article.text =
+                Html.fromHtml(bundle.getString("blog"), Html.FROM_HTML_MODE_COMPACT)
+        } else {
+            tv_blog_article.text = Html.fromHtml(bundle.getString("blog"))
+        }
         tv_blog_article.movementMethod = ScrollingMovementMethod()
 
         Glide.with(this)
