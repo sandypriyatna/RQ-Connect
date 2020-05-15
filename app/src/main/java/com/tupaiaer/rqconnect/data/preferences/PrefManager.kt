@@ -38,6 +38,10 @@ class PrefManager(context: Context) {
         sp.edit().clear().commit()
     }
 
+    fun deleteSpName() {
+        sp.edit().remove(KEY_NAME).commit();
+    }
+
     var spToken: String?
         get() = sp.getString(KEY_TOKEN, "")
         set(value) {

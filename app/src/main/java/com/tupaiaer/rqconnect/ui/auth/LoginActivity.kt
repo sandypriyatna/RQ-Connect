@@ -2,6 +2,7 @@ package com.tupaiaer.rqconnect.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.preference.PreferenceManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,7 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
 
     override val kodein by kodein()
     private val factory: AuthViewModelFactory by instance()
+    private var doubleBackToExitPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +43,7 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
         prefManager.spCheckIntroSlider = true
 
         viewModel.getLoggedInUser().observe(this, Observer { user ->
-            if (user != null) {
+            if (prefManager.spName == user.name) {
                 Intent(this, MainActivity::class.java).also {
                     it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(it)
@@ -68,5 +70,16 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
         progress_bar_login.gone()
         materialButton.visibility = View.VISIBLE
         login_layout.snackbar(message)
+    }
+
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            finishAffinity()
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        login_layout.snackbar("Ketuk sekali lagi untuk keluar")
+
+        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
 }

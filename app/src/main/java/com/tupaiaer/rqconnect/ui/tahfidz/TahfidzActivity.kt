@@ -1,5 +1,6 @@
 package com.tupaiaer.rqconnect.ui.tahfidz
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,10 +10,12 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.bumptech.glide.Glide
 import com.tupaiaer.rqconnect.R
 import com.tupaiaer.rqconnect.RqconnectApplication.Companion.prefManager
+import com.tupaiaer.rqconnect.ui.auth.LoginActivity
 import com.tupaiaer.rqconnect.ui.tahfidz.lajnah.LajnahFragment
 import com.tupaiaer.rqconnect.ui.tahfidz.pekan.PekanFragment
 import com.tupaiaer.rqconnect.ui.tahfidz.triwulan.TriwulanFragment
 import kotlinx.android.synthetic.main.activity_tahfidz.*
+import kotlin.system.exitProcess
 
 class TahfidzActivity : AppCompatActivity() {
 
@@ -26,6 +29,11 @@ class TahfidzActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(viewPager)
         getTahfidzData()
 
+        btn_logout.setOnClickListener {
+            prefManager.deleteSpName()
+            startActivity(Intent(this@TahfidzActivity, LoginActivity::class.java))
+            finish()
+        }
         iv_back.setOnClickListener { onBackPressed() }
     }
 
