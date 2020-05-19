@@ -7,7 +7,7 @@
 
         <variable
             name="gallery"
-            type="com.tupaiaer.rqconnect.data.db.entities.Gallery" />
+            type="id.credeva.rqconnect.data.db.entities.Gallery" />
     </data>
 
     <androidx.cardview.widget.CardView

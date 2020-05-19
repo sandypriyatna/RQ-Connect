@@ -6,7 +6,7 @@
 
         <variable
             name="triwulan"
-            type="com.tupaiaer.rqconnect.data.db.entities.Triwulan" />
+            type="id.credeva.rqconnect.data.db.entities.Triwulan" />
     </data>
 
     <androidx.cardview.widget.CardView

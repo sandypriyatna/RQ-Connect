@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.tupaiaer.rqconnect.ui.payment.paymentConfirmation.ConfirmViewModel" />
+            type="id.credeva.rqconnect.ui.payment.paymentConfirmation.ConfirmViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +30,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_arrow_back" />
+                app:srcCompat="@drawable/ic_arrow_back"
+                tools:ignore="VectorDrawableCompat" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -124,11 +125,9 @@
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="16dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_evidence"
-                app:srcCompat="@drawable/btn_round" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_evidence" />
 
             <TextView
                 android:id="@+id/tv_evidence"

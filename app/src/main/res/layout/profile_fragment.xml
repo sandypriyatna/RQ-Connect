@@ -8,7 +8,7 @@
 
         <variable
             name="viewmodel"
-            type="com.tupaiaer.rqconnect.ui.profile.ProfileViewModel" />
+            type="id.credeva.rqconnect.ui.profile.ProfileViewModel" />
 
     </data>
 

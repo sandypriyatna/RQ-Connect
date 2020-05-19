@@ -20,7 +20,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.tupaiaer.rqconnect"
+        applicationId "id.credeva.rqconnect"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
@@ -102,4 +102,7 @@ dependencies {
     // shimmer recyclerview
     implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
     implementation 'com.airbnb.android:lottie:3.4.0'
+
+    implementation 'com.afollestad.material-dialogs:core:0.9.4.5'
+
 }

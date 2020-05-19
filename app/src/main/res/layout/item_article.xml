@@ -6,7 +6,7 @@
 
         <variable
             name="article"
-            type="com.tupaiaer.rqconnect.data.db.entities.Article" />
+            type="id.credeva.rqconnect.data.db.entities.Article" />
     </data>
 
     <androidx.cardview.widget.CardView

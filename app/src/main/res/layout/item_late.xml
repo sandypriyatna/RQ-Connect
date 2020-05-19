@@ -7,7 +7,7 @@
 
         <variable
             name="late"
-            type="com.tupaiaer.rqconnect.data.db.entities.payment.Late" />
+            type="id.credeva.rqconnect.data.db.entities.payment.Late" />
     </data>
 
     <androidx.cardview.widget.CardView

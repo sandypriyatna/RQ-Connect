@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.tupaiaer.rqconnect.ui.profile.ProfileFragment"
+        android:name="id.credeva.rqconnect.ui.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/profile_fragment" />
     <fragment
         android:id="@+id/quotesFragment"
-        android:name="com.tupaiaer.rqconnect.ui.quotes.QuotesFragment"
+        android:name="id.credeva.rqconnect.ui.quotes.QuotesFragment"
         android:label="quotes_fragment"
         tools:layout="@layout/quotes_fragment" />
 </navigation>

@@ -6,7 +6,7 @@
 
         <variable
             name="paidoff"
-            type="com.tupaiaer.rqconnect.data.db.entities.payment.PaidOff" />
+            type="id.credeva.rqconnect.data.db.entities.payment.PaidOff" />
     </data>
 
     <androidx.cardview.widget.CardView

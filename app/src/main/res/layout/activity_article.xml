@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.tupaiaer.rqconnect.ui.article.ArticleViewModel" />
+            type="id.credeva.rqconnect.ui.article.ArticleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

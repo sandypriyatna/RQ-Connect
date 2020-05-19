@@ -7,7 +7,7 @@
 
         <variable
             name="lajnah"
-            type="com.tupaiaer.rqconnect.data.db.entities.Lajnah" />
+            type="id.credeva.rqconnect.data.db.entities.Lajnah" />
     </data>
 
     <androidx.cardview.widget.CardView

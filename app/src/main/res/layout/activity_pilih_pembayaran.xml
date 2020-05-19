@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.tupaiaer.rqconnect.ui.payment.paymentSelection.PilihPembayaranViewModel" />
+            type="id.credeva.rqconnect.ui.payment.paymentSelection.PilihPembayaranViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
