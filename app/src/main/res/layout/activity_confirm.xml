@@ -53,6 +53,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 android:text="Kode pembayaran"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -102,6 +104,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_red_light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
@@ -147,24 +152,24 @@
             android:id="@+id/ll_success_payment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.airbnb.lottie.LottieAnimationView
-                app:lottie_autoPlay="true"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
+                app:lottie_autoPlay="true"
                 app:lottie_rawRes="@raw/success" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\nBerhasil mengirim bukti"
+                android:text="\nAlhamdulillah\nJazakumullahu Khairan"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 

@@ -2,6 +2,6 @@ package id.credeva.rqconnect.ui.payment.paymentConfirmation
 
 interface ConfirmListener {
     fun onStarted()
-    fun onSucces(message: String)
+    fun onSucces()
     fun onFailure(message: String)
 }

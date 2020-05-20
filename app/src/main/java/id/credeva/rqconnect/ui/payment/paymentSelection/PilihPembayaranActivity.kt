@@ -14,6 +14,7 @@ import id.credeva.rqconnect.data.adapter.ChosePaymentAdapter
 import id.credeva.rqconnect.data.db.entities.Bank
 import id.credeva.rqconnect.databinding.ActivityPilihPembayaranBinding
 import id.credeva.rqconnect.ui.payment.checkout.CheckoutActivity
+import id.credeva.rqconnect.ui.payment.checkout.OptionCheckoutActivity
 import kotlinx.android.synthetic.main.activity_pilih_pembayaran.*
 import org.kodein.di.android.kodein
 import org.kodein.di.KodeinAware
@@ -53,7 +54,7 @@ class PilihPembayaranActivity : AppCompatActivity(), KodeinAware,
             prefManager.spRek = bank.provider
             prefManager.spRekName = bank.name
             prefManager.spRekNumber = bank.number
-            startActivity(Intent(this, CheckoutActivity::class.java))
+            startActivity(Intent(this, OptionCheckoutActivity::class.java))
         }
     }
 }

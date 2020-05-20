@@ -26,6 +26,10 @@ import id.credeva.rqconnect.R
 import id.credeva.rqconnect.RqconnectApplication.Companion.prefManager
 import id.credeva.rqconnect.databinding.ActivityConfirmBinding
 import id.credeva.rqconnect.ui.main.MainActivity
+import id.credeva.rqconnect.ui.payment.paymentConfirmation.deposit.DepositViewModel
+import id.credeva.rqconnect.ui.payment.paymentConfirmation.deposit.DepositViewModelFactory
+import id.credeva.rqconnect.ui.payment.paymentConfirmation.infaq.InfaqViewModel
+import id.credeva.rqconnect.ui.payment.paymentConfirmation.infaq.InfaqViewModelFactory
 import id.credeva.rqconnect.util.gone
 import id.credeva.rqconnect.util.show
 import id.credeva.rqconnect.util.toast
@@ -42,6 +46,8 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
 
     override val kodein by kodein()
     private val factory: ConfirmViewModelFactory by instance()
+    private val depositFactory: DepositViewModelFactory by instance()
+    private val infaqFactory: InfaqViewModelFactory by instance()
 
     private var cameraPath: String? = null
     private var finalPath: String? = null
@@ -53,6 +59,10 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
         val binding: ActivityConfirmBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_confirm)
         val viewModel = ViewModelProviders.of(this, factory).get(ConfirmViewModel::class.java)
+        val viewModelDeposit =
+            ViewModelProviders.of(this, depositFactory).get(DepositViewModel::class.java)
+        val viewModelInfaq =
+            ViewModelProviders.of(this, infaqFactory).get(InfaqViewModel::class.java)
 
         binding.viewmodel = viewModel
         viewModel.confirmListener = this
@@ -70,14 +80,17 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
             dialog.show()
 
             camera.setOnClickListener {
-                if (isGranted()) {
-                    openCamera()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.CAMERA) ==
+                        PackageManager.PERMISSION_DENIED
+                    ) {
+                        val permissions = arrayOf(Manifest.permission.CAMERA);
+                        requestPermissions(permissions, CAMERA_REQUEST);
+                    } else {
+                        openCamera();
+                    }
                 } else {
-                    ActivityCompat.requestPermissions(
-                        this,
-                        arrayOf(Manifest.permission.CAMERA),
-                        CAMERA_REQUEST
-                    )
+                    openCamera();
                 }
                 dialog.dismiss()
             }
@@ -87,16 +100,12 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
                     if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
                         PackageManager.PERMISSION_DENIED
                     ) {
-                        //permission denied
                         val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE);
-                        //show popup to request runtime permission
                         requestPermissions(permissions, PERMISSION_CODE);
                     } else {
-                        //permission already granted
                         pickImageFromGallery();
                     }
                 } else {
-                    //system OS is < Marshmallow
                     pickImageFromGallery();
                 }
                 dialog.dismiss()
@@ -106,6 +115,9 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
         btn_confirm.setOnClickListener {
             if (finalPath != null) {
                 viewModel.sendData(finalPath!!)
+                viewModelDeposit.sendDeposit()
+                viewModelInfaq.sendInfaq()
+                prefManager.spStatusPayment = "active"
             } else {
                 this.toast("Maaf, bukti foto masih kosong")
             }
@@ -126,24 +138,24 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-//        when (requestCode) {
-//            CAMERA_REQUEST -> {
-//                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    openCamera()
-//                }
-//            }
-//        }
+        when (requestCode) {
+            CAMERA_REQUEST -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openCamera()
+                } else {
+                    toast("Permission di tolak")
+                }
+            }
+        }
 
         when (requestCode) {
             PERMISSION_CODE -> {
                 if (grantResults.size > 0 && grantResults[0] ==
                     PackageManager.PERMISSION_GRANTED
                 ) {
-                    //permission from popup granted
                     pickImageFromGallery()
                 } else {
-                    //permission from popup denied
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+                    toast("Permission di tolak")
                 }
             }
         }
@@ -159,7 +171,6 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
             ) == PermissionChecker.PERMISSION_GRANTED
         }
     }
-
 
     private fun openCamera() {
         var photo: File? = null
@@ -206,8 +217,9 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
             tv_evidence.visibility = View.VISIBLE
 
             finalPath = cameraPath
-            Log.v("Camera Path: ", finalPath.toString())
+
         }
+
 
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
             val selectedImage = data?.data
@@ -235,13 +247,17 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
         pb_confirm.show()
     }
 
-    override fun onSucces(message: String) {
+    override fun onSucces() {
         this.cl_confirm.visibility = View.GONE
         this.ll_success_payment.visibility = View.VISIBLE
 
         Handler().postDelayed(
             {
-                startActivity(Intent(this@ConfirmActivity, MainActivity::class.java))
+                val i = Intent(applicationContext, MainActivity::class.java)        // Specify any activity here e.g. home or splash or login etc
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(i)
                 finish()
             }, 3000
         )

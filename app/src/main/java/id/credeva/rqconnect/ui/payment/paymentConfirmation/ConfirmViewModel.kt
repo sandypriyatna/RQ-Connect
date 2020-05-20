@@ -28,6 +28,7 @@ class ConfirmViewModel(
 
         Coroutines.main {
             try {
+                confirmListener?.onSucces()
                 val detectionResponse =
                     repository.confirmResponse(idPayment, createMultiPart(imagePath))
 

@@ -54,6 +54,20 @@ interface MyApi {
         @Part evidence: MultipartBody.Part
     ): Response<ResponseBody>
 
+    @Headers("Accept: application/json")
+    @FormUrlEncoded
+    @POST("addon/deposit")
+    suspend fun storeDeposit(
+        @Field("amount") id: Int?
+    ): Response<ResponseBody>
+
+    @Headers("Accept: application/json")
+    @FormUrlEncoded
+    @POST("addon/infaq")
+    suspend fun storeInfaq(
+        @Field("amount") id: Int?
+    ): Response<ResponseBody>
+
     companion object {
         operator fun invoke(
             networkConnectionInterceptor: NetworkConnectionInterceptor
@@ -65,7 +79,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                 .client(getOkHttpClient())
-                .baseUrl("https://rq-connect.com/api/")
+                .baseUrl("https://developers.rq-connect.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MyApi::class.java)

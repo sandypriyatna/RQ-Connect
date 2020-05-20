@@ -22,6 +22,9 @@ private const val KEY_EVIDENCE = "key_evidence"
 private const val KEY_TEMP_CODE = "key_temp_code"
 private const val KEY_TEMP_TOTAL = "key_temp_total"
 private const val KEY_STATUS_PAYMENT = "key_status_payment"
+private const val KEY_TABUNGAN = "key_tabungan"
+private const val KEY_INFAQ = "key_infaq"
+private const val KEY_SUM_TOTAL = "key_sum_total"
 
 class PrefManager(context: Context) {
 
@@ -82,6 +85,34 @@ class PrefManager(context: Context) {
         get() = sp.getString(KEY_TOTAL_PAYMENT, "")
         set(value) {
             spe.putString(KEY_TOTAL_PAYMENT, value)
+            spe.commit()
+        }
+
+    var spTabungan: Int?
+        get() = sp.getInt(KEY_TABUNGAN, 0)
+        set(value) {
+            if (value != null) {
+                spe.putInt(KEY_TABUNGAN, value)
+            }
+            spe.commit()
+        }
+
+
+    var spInfaq: Int?
+        get() = sp.getInt(KEY_INFAQ, 0)
+        set(value) {
+            if (value != null) {
+                spe.putInt(KEY_INFAQ, value)
+            }
+            spe.commit()
+        }
+
+    var spSumTotalPayment: Int?
+        get() = sp.getInt(KEY_SUM_TOTAL, 0)
+        set(value) {
+            if (value != null) {
+                spe.putInt(KEY_SUM_TOTAL, value)
+            }
             spe.commit()
         }
 

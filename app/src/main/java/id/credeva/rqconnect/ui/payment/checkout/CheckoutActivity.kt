@@ -4,8 +4,10 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.appcompat.app.AppCompatActivity
 import id.credeva.rqconnect.R
 import id.credeva.rqconnect.RqconnectApplication.Companion.prefManager
 import id.credeva.rqconnect.ui.main.MainActivity
@@ -23,10 +25,6 @@ class CheckoutActivity : AppCompatActivity() {
 
         btn_confirm.setOnClickListener {
             startActivity(Intent(this@CheckoutActivity, ConfirmActivity::class.java))
-        }
-
-        btn_later_confirm.setOnClickListener {
-            startActivity(Intent(this@CheckoutActivity, MainActivity::class.java))
         }
 
         tv_copy.setOnClickListener {
@@ -48,6 +46,9 @@ class CheckoutActivity : AppCompatActivity() {
         tv_rek.text = prefManager.spRek
         tv_rek_name.text = prefManager.spRekName
         tv_rek_number.text = prefManager.spRekNumber.toString()
+        tv_tabungan.text = prefManager.spTabungan.toString()
+        tv_infaq.text = prefManager.spInfaq.toString()
+        tv_total_sum_payment.text = prefManager.spSumTotalPayment.toString()
     }
 
 }

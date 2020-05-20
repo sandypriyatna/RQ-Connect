@@ -9,28 +9,29 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name="id.credeva.rqconnect.RqconnectApplication"
+        android:name=".RqconnectApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="id.credeva.rqconnect.ui.payment.evidence.BuktiPembayaranActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.payment.paymentConfirmation.ConfirmActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.payment.paymentSelection.PilihPembayaranActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.gallery.detail.GalleryDetailActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.gallery.GalleryActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.article.DetailArticleActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.home.HomeActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.article.ArticleActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.auth.LoginActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.payment.checkout.CheckoutActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.payment.PembayaranActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.tahfidz.TahfidzActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.main.MainActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.introslider.IntroSliderActivity" />
-        <activity android:name="id.credeva.rqconnect.ui.splashscreen.SplashScreenActivity">
+        <activity android:name=".ui.payment.checkout.OptionCheckoutActivity"></activity>
+        <activity android:name=".ui.payment.evidence.BuktiPembayaranActivity" />
+        <activity android:name=".ui.payment.paymentConfirmation.ConfirmActivity" />
+        <activity android:name=".ui.payment.paymentSelection.PilihPembayaranActivity" />
+        <activity android:name=".ui.gallery.detail.GalleryDetailActivity" />
+        <activity android:name=".ui.gallery.GalleryActivity" />
+        <activity android:name=".ui.article.DetailArticleActivity" />
+        <activity android:name=".ui.home.HomeActivity" />
+        <activity android:name=".ui.article.ArticleActivity" />
+        <activity android:name=".ui.auth.LoginActivity" />
+        <activity android:name=".ui.payment.checkout.CheckoutActivity" />
+        <activity android:name=".ui.payment.PembayaranActivity" />
+        <activity android:name=".ui.tahfidz.TahfidzActivity" />
+        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.introslider.IntroSliderActivity" />
+        <activity android:name=".ui.splashscreen.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

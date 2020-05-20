@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         tv_name.text = "Selamat datang, ${prefManager.spName} "
 
-        if (prefManager.spEvidence == null || prefManager.spEvidence.toString() == null) {
+        if (prefManager.spStatusPayment == null || prefManager.spStatusPayment!!.toString().isEmpty()) {
             tv_payment_information.visibility = View.VISIBLE
         }
 

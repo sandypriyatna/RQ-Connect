@@ -12,6 +12,8 @@ import id.credeva.rqconnect.ui.gallery.GalleryViewModelFactory
 import id.credeva.rqconnect.ui.gallery.detail.GalleryDetailViewModelFactory
 import id.credeva.rqconnect.ui.payment.PembayaranViewModelFactory
 import id.credeva.rqconnect.ui.payment.paymentConfirmation.ConfirmViewModelFactory
+import id.credeva.rqconnect.ui.payment.paymentConfirmation.deposit.DepositViewModelFactory
+import id.credeva.rqconnect.ui.payment.paymentConfirmation.infaq.InfaqViewModelFactory
 import id.credeva.rqconnect.ui.payment.paymentSelection.PilihPembayaranViewModelFactory
 import id.credeva.rqconnect.ui.profile.ProfileViewModelFactory
 import id.credeva.rqconnect.ui.tahfidz.lajnah.LajnahViewModelFactory
@@ -46,6 +48,8 @@ class RqconnectApplication : Application(), KodeinAware {
         bind() from singleton { GalleryDetailRepository(instance(), instance()) }
         bind() from singleton { ChosePaymentRepository(instance()) }
         bind() from singleton { ConfirmPaymentRepository(instance()) }
+        bind() from singleton { DepositPaymentRepository(instance()) }
+        bind() from singleton { InfaqPaymentRepository(instance()) }
         bind() from provider { AuthViewModelFactory(instance()) }
         bind() from provider { ProfileViewModelFactory(instance()) }
         bind() from provider { ArticleViewModelFactory(instance()) }
@@ -53,6 +57,8 @@ class RqconnectApplication : Application(), KodeinAware {
         bind() from provider { LajnahViewModelFactory(instance()) }
         bind() from provider { TriwulanViewModelFactory(instance()) }
         bind() from provider { GalleryViewModelFactory(instance()) }
+        bind() from provider { DepositViewModelFactory(instance()) }
+        bind() from provider { InfaqViewModelFactory(instance()) }
         bind() from provider { GalleryDetailViewModelFactory(instance()) }
         bind() from provider { PembayaranViewModelFactory(instance(), instance()) }
         bind() from provider {
