@@ -74,10 +74,8 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
         if (doubleBackToExitPressedOnce) {
             finishAffinity()
         }
-
         this.doubleBackToExitPressedOnce = true
         login_layout.snackbar("Ketuk sekali lagi untuk keluar")
-
         Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
 }

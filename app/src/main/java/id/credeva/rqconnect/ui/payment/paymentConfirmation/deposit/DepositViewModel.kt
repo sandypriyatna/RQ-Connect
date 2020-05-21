@@ -13,7 +13,7 @@ class DepositViewModel(
 ) : ViewModel() {
 
     fun sendDeposit() {
-        val amount = prefManager.spTabungan
+        val amount = prefManager.spDeposit?.toInt()
         Coroutines.main {
             try {
                 val detectionResponse =

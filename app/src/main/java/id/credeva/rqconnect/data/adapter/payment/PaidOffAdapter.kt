@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import id.credeva.rqconnect.R
-import id.credeva.rqconnect.RqconnectApplication.Companion.prefManager
 import id.credeva.rqconnect.data.db.entities.payment.PaidOff
 import id.credeva.rqconnect.databinding.ItemPaidOffBinding
 import id.credeva.rqconnect.ui.payment.PaidViewClickListener
@@ -30,8 +29,6 @@ class PaidOffAdapter(
         holder.itemPaidOffBinding.paidoff = paidOff[position]
         holder.itemPaidOffBinding.root.setOnClickListener {
             listener.onClickItem(holder.itemPaidOffBinding.root, paidOff[position])
-            prefManager.spTempRefKey = paidOff[position].ref_key
-            prefManager.spTempPayTotal = paidOff[position].price
         }
     }
 

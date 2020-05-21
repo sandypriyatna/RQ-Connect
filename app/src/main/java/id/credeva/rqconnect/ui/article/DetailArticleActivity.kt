@@ -29,6 +29,7 @@ class DetailArticleActivity : AppCompatActivity() {
         } else {
             tv_blog_article.text = Html.fromHtml(bundle.getString("blog"))
         }
+
         tv_blog_article.movementMethod = ScrollingMovementMethod()
 
         Glide.with(this)

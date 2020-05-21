@@ -29,11 +29,13 @@ class TahfidzActivity : AppCompatActivity() {
         getTahfidzData()
 
         btn_logout.setOnClickListener {
-            prefManager.deleteSpName()
+            prefManager.clear()
             startActivity(Intent(this@TahfidzActivity, LoginActivity::class.java))
             finish()
         }
+
         iv_back.setOnClickListener { onBackPressed() }
+
     }
 
     private fun getTahfidzData() {

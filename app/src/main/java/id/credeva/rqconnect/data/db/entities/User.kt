@@ -8,7 +8,6 @@ const val CURRENT_USER_ID = 0
 
 @Entity
 data class User(
-
     @SerializedName("id")
     var id: Int? = null,
     @SerializedName("nis")

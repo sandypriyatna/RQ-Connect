@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.payment.checkout.OptionCheckoutActivity"></activity>
+        <activity android:name=".ui.payment.checkout.OptionCheckoutActivity" />
         <activity android:name=".ui.payment.evidence.BuktiPembayaranActivity" />
         <activity android:name=".ui.payment.paymentConfirmation.ConfirmActivity" />
         <activity android:name=".ui.payment.paymentSelection.PilihPembayaranActivity" />
@@ -38,7 +38,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

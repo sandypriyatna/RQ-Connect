@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <!--    <data>-->
-
-    <!--        <variable-->
-    <!--            name="viewmodel"-->
-    <!--            type="credevarqconnect.ui.main.MainViewModel" />-->
-    <!--    </data>-->
-
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
@@ -31,10 +26,12 @@
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:singleLine="true"
             android:text="Bismillah..."
             android:textSize="16sp"
             android:textStyle="bold"
@@ -68,8 +65,9 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_pembayaran"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="16dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 app:cardCornerRadius="9dp"
                 tools:layout_editor_absoluteX="-16dp"
                 tools:layout_editor_absoluteY="179dp">
@@ -78,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="16dp"
+                    android:layout_margin="8dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -117,8 +115,10 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_tahfidz"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="16dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
                 app:cardCornerRadius="9dp"
                 tools:layout_editor_absoluteX="-16dp"
                 tools:layout_editor_absoluteY="179dp">
@@ -127,7 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="16dp"
+                    android:layout_margin="8dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -162,8 +162,10 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_blog"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="16dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
                 app:cardCornerRadius="9dp"
                 tools:layout_editor_absoluteX="-16dp"
                 tools:layout_editor_absoluteY="179dp">
@@ -172,7 +174,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="16dp"
+                    android:layout_margin="8dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -207,8 +209,10 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_gallery"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="16dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="9dp"
                 tools:layout_editor_absoluteX="-16dp"
@@ -218,7 +222,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="16dp"
+                    android:layout_margin="8dp"
                     android:orientation="horizontal">
 
                     <ImageView

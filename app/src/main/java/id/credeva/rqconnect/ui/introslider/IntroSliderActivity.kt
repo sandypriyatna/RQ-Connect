@@ -71,7 +71,6 @@ class IntroSliderActivity : AppCompatActivity() {
     }
 
     private fun setupIndicator() {
-
         val indicators = arrayOfNulls<ImageView>(introSliderAdapter.itemCount)
         val layoutParams: LinearLayout.LayoutParams =
             LinearLayout.LayoutParams(

@@ -4,4 +4,5 @@
     <string name="input_nis">Masukan NIS</string>
     <string name="masuk">Masuk</string>
     <string name="msg_loading">loading</string>
+    <string name="empty_image">Maaf, bukti foto masih kosong</string>
 </resources>

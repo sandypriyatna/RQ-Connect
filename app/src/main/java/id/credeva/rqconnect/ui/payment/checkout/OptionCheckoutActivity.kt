@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import id.credeva.rqconnect.R
 import id.credeva.rqconnect.RqconnectApplication.Companion.prefManager
+import id.credeva.rqconnect.util.toast
 import kotlinx.android.synthetic.main.activity_option_checkout.*
 
 class OptionCheckoutActivity : AppCompatActivity() {
@@ -14,26 +15,34 @@ class OptionCheckoutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_option_checkout)
 
         btn_next_payment.setOnClickListener {
-
-            var deposit = et_tabungan.text.toString().toInt()
-            var infaq = et_infaq.text.toString().toInt()
-
-            if (deposit.toString().isEmpty()) {
-                prefManager.spTabungan = 0
-                prefManager.spSumTotalPayment = 500000
-                startActivity(Intent(this@OptionCheckoutActivity, CheckoutActivity::class.java))
-            } else if (infaq.toString().isEmpty()) {
-                prefManager.spInfaq = 0
-                prefManager.spSumTotalPayment = 500000
-                startActivity(Intent(this@OptionCheckoutActivity, CheckoutActivity::class.java))
-            } else {
-                prefManager.spTabungan = deposit
-                prefManager.spInfaq = infaq
-                prefManager.spSumTotalPayment =
-                    prefManager.spTabungan!! + prefManager.spInfaq!! + prefManager.spTotalPayment.toString()
+            if (et_tabungan.text.toString().trim().isEmpty() && et_infaq.text.toString().trim()
+                    .isEmpty()
+            ) {
+                prefManager.spDeposit = "0"
+                prefManager.spInfaq = "0"
+                prefManager.spTotalPayment =
+                    prefManager.spDeposit!! + prefManager.spInfaq!! + prefManager.spSppTotal.toString()
                         .toInt()
-                startActivity(Intent(this@OptionCheckoutActivity, CheckoutActivity::class.java))
+            } else if (et_tabungan.text.toString().trim().isEmpty()) {
+                prefManager.spDeposit = "0"
+                prefManager.spInfaq = et_infaq.text.toString()
+                prefManager.spTotalPayment =
+                    prefManager.spDeposit!! + prefManager.spInfaq!! + prefManager.spSppTotal.toString()
+                        .toInt()
+            } else if (et_infaq.text.toString().trim().isEmpty()) {
+                prefManager.spDeposit = et_tabungan.text.toString()
+                prefManager.spInfaq = "0"
+                prefManager.spTotalPayment =
+                    prefManager.spDeposit!! + prefManager.spInfaq!! + prefManager.spSppTotal.toString()
+                        .toInt()
+            } else {
+                prefManager.spDeposit = et_tabungan.text.toString()
+                prefManager.spInfaq = et_infaq.text.toString()
+                prefManager.spTotalPayment =
+                    prefManager.spDeposit!! + prefManager.spInfaq!! + prefManager.spSppTotal.toString()
+                        .toInt()
             }
+            startActivity(Intent(this@OptionCheckoutActivity, CheckoutActivity::class.java))
         }
     }
 }

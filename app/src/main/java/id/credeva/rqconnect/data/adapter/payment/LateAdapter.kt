@@ -8,9 +8,9 @@ import id.credeva.rqconnect.R
 import id.credeva.rqconnect.data.db.entities.payment.Late
 import id.credeva.rqconnect.databinding.ItemLateBinding
 
-class LateAdapter (
+class LateAdapter(
     private val late: List<Late>
-) : RecyclerView.Adapter<LateAdapter.LateViewHolder>(){
+) : RecyclerView.Adapter<LateAdapter.LateViewHolder>() {
 
     override fun getItemCount() = late.size
 

@@ -21,10 +21,9 @@ class ConfirmViewModel(
 
     fun sendData(imagePath: String) {
         confirmListener?.onStarted()
-        Log.v("Image Path: ", imagePath)
 
         val idPayment =
-            RequestBody.create("text/plain".toMediaTypeOrNull(), prefManager.spIdPayment.toString())
+            RequestBody.create("text/plain".toMediaTypeOrNull(), prefManager.spPaymentId.toString())
 
         Coroutines.main {
             try {

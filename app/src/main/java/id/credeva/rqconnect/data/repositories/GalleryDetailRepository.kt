@@ -11,8 +11,8 @@ class GalleryDetailRepository(
     private val pref: PrefManager
 ) : SafeApiRequest() {
 
-    private val bank = MutableLiveData<List<GalleryDetail>>()
+    private val galleryDetail = MutableLiveData<List<GalleryDetail>>()
 
-    suspend fun getGalleryDetail() = apiRequest { api.getDetailGallery(pref.spIdGallery) }
+    suspend fun getGalleryDetail() = apiRequest { api.getDetailGallery(pref.spGalleryId) }
 
 }

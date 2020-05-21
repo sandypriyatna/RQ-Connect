@@ -53,7 +53,7 @@ class GalleryActivity : AppCompatActivity(), KodeinAware, GalleryViewClickListen
 
     override fun onGalleryViewClickListener(view: View, gallery: Gallery) {
         view.setOnClickListener {
-            prefManager.spIdGallery = gallery.id!!
+            prefManager.spGalleryId = gallery.id!!
             startActivity(Intent(this@GalleryActivity, GalleryDetailActivity::class.java))
         }
     }

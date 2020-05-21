@@ -1,4 +1,5 @@
 package id.credeva.rqconnect.data.db.entities.payment
+
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 

@@ -119,7 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Masukan password"
-                android:inputType="textPassword"
+                android:inputType="numberPassword"
                 android:paddingStart="16dp"
                 android:text="@={viewmodel.password}"
                 android:textColorHint="@android:color/darker_gray" />

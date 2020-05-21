@@ -8,7 +8,7 @@ private const val KEY_TOKEN = "key_token"
 private const val KEY_GALLERY_ID = "key_gallery_id"
 private const val KEY_INTRO_SLIDER = "key_intro_slider"
 private const val KEY_REFF_KEY = "key_reff_key"
-private const val KEY_TOTAL_PAYMENT = "key_total_payment"
+private const val KEY_SPP_TOTAL = "key_total_payment"
 private const val KEY_DUE_DATE_PAY = "key_due_date_pay"
 private const val KEY_REK = "key_rek"
 private const val KEY_REK_NUMBER = "key_rek_number"
@@ -17,14 +17,12 @@ private const val KEY_NAME = "key_name"
 private const val KEY_NIS = "key_nis"
 private const val KEY_AVATAR = "key_avatar"
 private const val KEY_JUZ = "key_juz"
-private const val KEY_ID_PAYMENT = "key_id_payment"
+private const val KEY_PAYMENT_ID = "key_id_payment"
 private const val KEY_EVIDENCE = "key_evidence"
-private const val KEY_TEMP_CODE = "key_temp_code"
-private const val KEY_TEMP_TOTAL = "key_temp_total"
 private const val KEY_STATUS_PAYMENT = "key_status_payment"
-private const val KEY_TABUNGAN = "key_tabungan"
+private const val KEY_DEPOSIT = "key_tabungan"
 private const val KEY_INFAQ = "key_infaq"
-private const val KEY_SUM_TOTAL = "key_sum_total"
+private const val KEY_TOTAL_PAYMENT = "key_sum_total"
 
 class PrefManager(context: Context) {
 
@@ -51,7 +49,7 @@ class PrefManager(context: Context) {
             spe.commit()
         }
 
-    var spIdGallery: Int
+    var spGalleryId: Int
         get() = sp.getInt(KEY_GALLERY_ID, 0)
         set(value) {
             if (value != null) {
@@ -67,10 +65,10 @@ class PrefManager(context: Context) {
             spe.commit()
         }
 
-    var spIdPayment: String?
-        get() = sp.getString(KEY_ID_PAYMENT, "")
+    var spPaymentId: String?
+        get() = sp.getString(KEY_PAYMENT_ID, "")
         set(value) {
-            spe.putString(KEY_ID_PAYMENT, value)
+            spe.putString(KEY_PAYMENT_ID, value)
             spe.commit()
         }
 
@@ -81,38 +79,32 @@ class PrefManager(context: Context) {
             spe.commit()
         }
 
+    var spSppTotal: String?
+        get() = sp.getString(KEY_SPP_TOTAL, "")
+        set(value) {
+            spe.putString(KEY_SPP_TOTAL, value)
+            spe.commit()
+        }
+
+    var spDeposit: String?
+        get() = sp.getString(KEY_DEPOSIT, "")
+        set(value) {
+            spe.putString(KEY_DEPOSIT, value)
+            spe.commit()
+        }
+
+
+    var spInfaq: String?
+        get() = sp.getString(KEY_INFAQ, "")
+        set(value) {
+            spe.putString(KEY_INFAQ, value)
+            spe.commit()
+        }
+
     var spTotalPayment: String?
         get() = sp.getString(KEY_TOTAL_PAYMENT, "")
         set(value) {
             spe.putString(KEY_TOTAL_PAYMENT, value)
-            spe.commit()
-        }
-
-    var spTabungan: Int?
-        get() = sp.getInt(KEY_TABUNGAN, 0)
-        set(value) {
-            if (value != null) {
-                spe.putInt(KEY_TABUNGAN, value)
-            }
-            spe.commit()
-        }
-
-
-    var spInfaq: Int?
-        get() = sp.getInt(KEY_INFAQ, 0)
-        set(value) {
-            if (value != null) {
-                spe.putInt(KEY_INFAQ, value)
-            }
-            spe.commit()
-        }
-
-    var spSumTotalPayment: Int?
-        get() = sp.getInt(KEY_SUM_TOTAL, 0)
-        set(value) {
-            if (value != null) {
-                spe.putInt(KEY_SUM_TOTAL, value)
-            }
             spe.commit()
         }
 
@@ -183,20 +175,6 @@ class PrefManager(context: Context) {
         get() = sp.getString(KEY_STATUS_PAYMENT, null)
         set(value) {
             spe.putString(KEY_STATUS_PAYMENT, value)
-            spe.commit()
-        }
-
-    var spTempRefKey: String?
-        get() = sp.getString(KEY_TEMP_CODE, null)
-        set(value) {
-            spe.putString(KEY_TEMP_CODE, value)
-            spe.commit()
-        }
-
-    var spTempPayTotal: String?
-        get() = sp.getString(KEY_TEMP_TOTAL, null)
-        set(value) {
-            spe.putString(KEY_TEMP_TOTAL, value)
             spe.commit()
         }
 }

@@ -69,13 +69,14 @@
 
     <TextView
         android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="3dp"
+        android:layout_marginEnd="16dp"
+        android:singleLine="true"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/btn_logout"
         app:layout_constraintStart_toEndOf="@+id/iv_avatar"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -103,12 +104,13 @@
 
     <Button
         android:id="@+id/btn_logout"
-        android:layout_width="90dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="#e55353"
         android:text="Logout"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView16"

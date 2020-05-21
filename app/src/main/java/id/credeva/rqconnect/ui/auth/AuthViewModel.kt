@@ -21,7 +21,7 @@ class AuthViewModel(
     fun onLoginClick(view: View) {
         authListener?.onStarted()
         if (nis.isNullOrEmpty() || password.isNullOrEmpty() || nis.toString() == "" || password.toString() == "") {
-            authListener?.onFailure("Maaf,\nNIS atau Password kosong")
+            authListener?.onFailure("Maaf,\nNIS atau password kosong")
             return
         }
 

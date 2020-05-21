@@ -13,7 +13,7 @@ class InfaqViewModel(
 ) : ViewModel() {
 
     fun sendInfaq() {
-        val amount = prefManager.spInfaq
+        val amount = prefManager.spInfaq?.toInt()
         Coroutines.main {
             try {
                 val detectionResponse =

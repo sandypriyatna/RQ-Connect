@@ -13,7 +13,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_logo"/>
+            android:src="@drawable/camera"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_logo"/>
+            android:src="@drawable/gallery"/>
 
         <TextView
             android:layout_width="match_parent"

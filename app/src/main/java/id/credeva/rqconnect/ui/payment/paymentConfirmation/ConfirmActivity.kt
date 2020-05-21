@@ -13,11 +13,8 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
-import androidx.core.content.PermissionChecker
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
@@ -45,7 +42,8 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
     ConfirmListener {
 
     override val kodein by kodein()
-    private val factory: ConfirmViewModelFactory by instance()
+
+    private val confirmFactory: ConfirmViewModelFactory by instance()
     private val depositFactory: DepositViewModelFactory by instance()
     private val infaqFactory: InfaqViewModelFactory by instance()
 
@@ -58,7 +56,9 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
 
         val binding: ActivityConfirmBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_confirm)
-        val viewModel = ViewModelProviders.of(this, factory).get(ConfirmViewModel::class.java)
+
+        val viewModel =
+            ViewModelProviders.of(this, confirmFactory).get(ConfirmViewModel::class.java)
         val viewModelDeposit =
             ViewModelProviders.of(this, depositFactory).get(DepositViewModel::class.java)
         val viewModelInfaq =
@@ -119,7 +119,7 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
                 viewModelInfaq.sendInfaq()
                 prefManager.spStatusPayment = "active"
             } else {
-                this.toast("Maaf, bukti foto masih kosong")
+                this.toast(getString(R.string.empty_image))
             }
         }
 
@@ -150,7 +150,7 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
 
         when (requestCode) {
             PERMISSION_CODE -> {
-                if (grantResults.size > 0 && grantResults[0] ==
+                if (grantResults.isNotEmpty() && grantResults[0] ==
                     PackageManager.PERMISSION_GRANTED
                 ) {
                     pickImageFromGallery()
@@ -158,17 +158,6 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
                     toast("Permission di tolak")
                 }
             }
-        }
-    }
-
-    private fun isGranted(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-        } else {
-            PermissionChecker.checkSelfPermission(
-                this,
-                Manifest.permission.CAMERA
-            ) == PermissionChecker.PERMISSION_GRANTED
         }
     }
 
@@ -207,17 +196,16 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            Log.v("Image Path: ", cameraPath.toString())
 
             Glide.with(this)
                 .load(cameraPath)
                 .into(iv_evidence)
 
+            finalPath = cameraPath
+            Log.v("Camera Path: ", finalPath.toString())
+
             iv_evidence.visibility = View.VISIBLE
             tv_evidence.visibility = View.VISIBLE
-
-            finalPath = cameraPath
-
         }
 
 
@@ -238,6 +226,7 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
             finalPath = galleryPath
             Log.v("Gallery Path: ", finalPath.toString())
 
+            iv_evidence.visibility = View.VISIBLE
             tv_evidence.visibility = View.VISIBLE
         }
     }
@@ -253,7 +242,7 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
 
         Handler().postDelayed(
             {
-                val i = Intent(applicationContext, MainActivity::class.java)        // Specify any activity here e.g. home or splash or login etc
+                val i = Intent(applicationContext, MainActivity::class.java)
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
