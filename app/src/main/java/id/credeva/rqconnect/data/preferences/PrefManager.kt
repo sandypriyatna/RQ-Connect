@@ -79,32 +79,40 @@ class PrefManager(context: Context) {
             spe.commit()
         }
 
-    var spSppTotal: String?
-        get() = sp.getString(KEY_SPP_TOTAL, "")
+    var spSppTotal: Int?
+        get() = sp.getInt(KEY_SPP_TOTAL, 0)
         set(value) {
-            spe.putString(KEY_SPP_TOTAL, value)
+            if (value != null) {
+                spe.putInt(KEY_SPP_TOTAL, value)
+            }
             spe.commit()
         }
 
-    var spDeposit: String?
-        get() = sp.getString(KEY_DEPOSIT, "")
+    var spDeposit: Int?
+        get() = sp.getInt(KEY_DEPOSIT, 0)
         set(value) {
-            spe.putString(KEY_DEPOSIT, value)
+            if (value != null) {
+                spe.putInt(KEY_DEPOSIT, value)
+            }
             spe.commit()
         }
 
 
-    var spInfaq: String?
-        get() = sp.getString(KEY_INFAQ, "")
+    var spInfaq: Int?
+        get() = sp.getInt(KEY_INFAQ, 0)
         set(value) {
-            spe.putString(KEY_INFAQ, value)
+            if (value != null) {
+                spe.putInt(KEY_INFAQ, value)
+            }
             spe.commit()
         }
 
-    var spTotalPayment: String?
-        get() = sp.getString(KEY_TOTAL_PAYMENT, "")
+    var spTotalPayment: Int?
+        get() = sp.getInt(KEY_TOTAL_PAYMENT, 0)
         set(value) {
-            spe.putString(KEY_TOTAL_PAYMENT, value)
+            if (value != null) {
+                spe.putInt(KEY_TOTAL_PAYMENT, value)
+            }
             spe.commit()
         }
 

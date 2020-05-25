@@ -44,6 +44,7 @@ class PekanFragment : Fragment(), KodeinAware {
         viewModel.getPekan()
         viewModel.pekan.observe(viewLifecycleOwner, Observer { pekan ->
             try {
+                pb_pekan.visibility = View.GONE
                 rv_pekan.also {
                     it.layoutManager = LinearLayoutManager(requireContext())
                     it.setHasFixedSize(true)

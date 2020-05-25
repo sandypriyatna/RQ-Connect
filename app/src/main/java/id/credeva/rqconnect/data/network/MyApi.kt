@@ -79,7 +79,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                 .client(getOkHttpClient())
-                .baseUrl("https://developers.rq-connect.com/api/")
+                .baseUrl("https://rq-connect.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MyApi::class.java)

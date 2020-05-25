@@ -45,9 +45,11 @@ class PembayaranActivity : AppCompatActivity(), KodeinAware, PaidViewClickListen
 
         viewModel.getRemain()
         viewModel.getPaidOff()
+        prefManager.spStatusPayment = null
 
         viewModel.remain.observe(this, Observer { remain ->
             try {
+                cv_progress_payment.visibility = View.GONE
                 tv_total_payment.text = "Rp. " + remain[0].price
                 tv_due_date.text = remain[0].validBefore
                 tv_ref_key.text = remain[0].refKey
@@ -67,9 +69,26 @@ class PembayaranActivity : AppCompatActivity(), KodeinAware, PaidViewClickListen
 
                 prefManager.spPaymentId = remain[0].id.toString()
                 prefManager.spRefKey = remain[0].refKey
-                prefManager.spSppTotal = remain[0].price
+                prefManager.spSppTotal = remain[0].price!!.toInt()
                 prefManager.spDueDatePay = remain[0].validBefore
-                prefManager.spEvidence = remain[0].evidence
+                prefManager.spEvidence = remain[0].evidence.toString()
+
+                val statusPayment = remain[0].evidence
+
+                if (statusPayment == null) {
+                    btn_payment.text = "Bayar"
+                    tv_month.setTextColor(Color.parseColor("#FF000000"))
+                    tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
+                    cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                    btn_payment.visibility = View.VISIBLE
+                } else if (statusPayment != null) {
+                    btn_payment.text = "Lihat Bukti"
+                    tv_month.setTextColor(Color.parseColor("#FF000000"))
+                    tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
+                    cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                    btn_payment.visibility = View.VISIBLE
+                    prefManager.spStatusPayment = "active"
+                }
 
             } catch (e: Exception) {
                 Log.e("errorPembayaran", e.message.toString())
@@ -92,19 +111,6 @@ class PembayaranActivity : AppCompatActivity(), KodeinAware, PaidViewClickListen
             }
         }
 
-        if (prefManager.spStatusPayment == null || prefManager.spStatusPayment!!.toString().isEmpty()) {
-            btn_payment.text = "Bayar"
-            tv_month.setTextColor(Color.parseColor("#FF000000"))
-            tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
-            cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
-            btn_payment.visibility = View.VISIBLE
-        } else if(prefManager.spStatusPayment == "active") {
-            btn_payment.text = "Lihat Bukti"
-            tv_month.setTextColor(Color.parseColor("#FF000000"))
-            tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
-            cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
-            btn_payment.visibility = View.VISIBLE
-        }
 
         iv_back.setOnClickListener { onBackPressed() }
     }

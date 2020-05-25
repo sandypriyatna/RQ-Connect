@@ -43,6 +43,7 @@ class TriwulanFragment : Fragment(), KodeinAware {
         viewModel.getTriwulan()
         viewModel.triwulan.observe(viewLifecycleOwner, Observer { triwulan ->
             try {
+                pb_triwulan.visibility = View.GONE
                 rv_triwulan.also {
                     it.layoutManager = LinearLayoutManager(requireContext())
                     it.setHasFixedSize(true)

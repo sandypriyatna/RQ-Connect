@@ -36,6 +36,7 @@ class ArticleActivity : AppCompatActivity(), KodeinAware, ArticleViewClickListen
         viewModel.getArticle()
         viewModel.article.observe(this, Observer { article ->
             try {
+                pb_article.visibility = View.GONE
                 rv_article.also {
                     it.layoutManager = LinearLayoutManager(this)
                     it.setHasFixedSize(true)

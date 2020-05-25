@@ -18,7 +18,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_arrow_back" />
+            app:srcCompat="@drawable/ic_arrow_back"
+            tools:ignore="VectorDrawableCompat" />
 
         <TextView
             android:id="@+id/textView8"
@@ -80,8 +81,16 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_evidence"
-            app:srcCompat="@drawable/btn_round" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_evidence" />
+
+        <ProgressBar
+            android:id="@+id/pb_evidence"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_evidence"
+            app:layout_constraintEnd_toEndOf="@+id/iv_evidence"
+            app:layout_constraintStart_toStartOf="@+id/iv_evidence"
+            app:layout_constraintTop_toTopOf="@+id/iv_evidence" />
 
         <TextView
             android:id="@+id/tv_evidence"

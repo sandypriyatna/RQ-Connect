@@ -15,6 +15,15 @@
         android:layout_height="match_parent"
         tools:context=".ui.gallery.GalleryActivity">
 
+        <ProgressBar
+            android:id="@+id/pb_gallery"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/itemsswipetorefresh" />
+
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="wrap_content"
@@ -41,16 +50,23 @@
             app:layout_constraintStart_toEndOf="@+id/iv_back"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_gallery"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/itemsswipetorefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="0px"
+            android:layout_weight="1"
             android:layout_marginTop="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_back" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_back">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

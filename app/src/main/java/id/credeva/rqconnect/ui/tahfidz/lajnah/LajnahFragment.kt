@@ -43,6 +43,7 @@ class LajnahFragment : Fragment(), KodeinAware {
         viewModel.getLajnah()
         viewModel.lajnah.observe(viewLifecycleOwner, Observer { lajnah ->
             try {
+                pb_lajnah.visibility = View.GONE
                 rv_lajnah.also {
                     it.layoutManager = LinearLayoutManager(requireContext())
                     it.setHasFixedSize(true)

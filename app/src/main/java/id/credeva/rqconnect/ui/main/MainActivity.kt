@@ -3,6 +3,7 @@ package id.credeva.rqconnect.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import id.credeva.rqconnect.R
@@ -24,7 +25,9 @@ class MainActivity : AppCompatActivity() {
 
         tv_name.text = "Selamat datang, ${prefManager.spName} "
 
-        if (prefManager.spStatusPayment == null || prefManager.spStatusPayment!!.toString().isEmpty()) {
+        Log.v("status", prefManager.spStatusPayment.toString())
+
+        if (prefManager.spStatusPayment == "active") {
             tv_payment_information.visibility = View.VISIBLE
         }
 

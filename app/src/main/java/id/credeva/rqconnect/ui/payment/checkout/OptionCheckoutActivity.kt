@@ -18,29 +18,25 @@ class OptionCheckoutActivity : AppCompatActivity() {
             if (et_tabungan.text.toString().trim().isEmpty() && et_infaq.text.toString().trim()
                     .isEmpty()
             ) {
-                prefManager.spDeposit = "0"
-                prefManager.spInfaq = "0"
+                prefManager.spDeposit = 0
+                prefManager.spInfaq = 0
                 prefManager.spTotalPayment =
-                    prefManager.spDeposit!! + prefManager.spInfaq!! + prefManager.spSppTotal.toString()
-                        .toInt()
+                    prefManager.spDeposit!! + prefManager.spInfaq!! + prefManager.spSppTotal!!
             } else if (et_tabungan.text.toString().trim().isEmpty()) {
-                prefManager.spDeposit = "0"
-                prefManager.spInfaq = et_infaq.text.toString()
+                prefManager.spDeposit = 0
+                prefManager.spInfaq = et_infaq.text.toString().toInt()
                 prefManager.spTotalPayment =
-                    prefManager.spDeposit!! + prefManager.spInfaq!! + prefManager.spSppTotal.toString()
-                        .toInt()
+                    prefManager.spDeposit!! + prefManager.spInfaq!! + prefManager.spSppTotal!!
             } else if (et_infaq.text.toString().trim().isEmpty()) {
-                prefManager.spDeposit = et_tabungan.text.toString()
-                prefManager.spInfaq = "0"
+                prefManager.spDeposit = et_tabungan.text.toString().toInt()
+                prefManager.spInfaq = 0
                 prefManager.spTotalPayment =
-                    prefManager.spDeposit!! + prefManager.spInfaq!! + prefManager.spSppTotal.toString()
-                        .toInt()
+                    prefManager.spDeposit!! + prefManager.spInfaq!! + prefManager.spSppTotal!!
             } else {
-                prefManager.spDeposit = et_tabungan.text.toString()
-                prefManager.spInfaq = et_infaq.text.toString()
+                prefManager.spDeposit = et_tabungan.text.toString().toInt()
+                prefManager.spInfaq = et_infaq.text.toString().toInt()
                 prefManager.spTotalPayment =
-                    prefManager.spDeposit!! + prefManager.spInfaq!! + prefManager.spSppTotal.toString()
-                        .toInt()
+                    prefManager.spDeposit!! + prefManager.spInfaq!! + prefManager.spSppTotal!!
             }
             startActivity(Intent(this@OptionCheckoutActivity, CheckoutActivity::class.java))
         }

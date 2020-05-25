@@ -2,6 +2,7 @@ package id.credeva.rqconnect.ui.gallery.detail
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -33,6 +34,7 @@ class GalleryDetailActivity : AppCompatActivity(), KodeinAware {
         viewModel.getGalleryDetail()
         viewModel.galleryDetail.observe(this, Observer { galleryDetail ->
             try {
+                pb_gallery_detail.visibility = View.GONE
                 rv_gallery_detail.also {
                     it.layoutManager = LinearLayoutManager(this)
                     it.setHasFixedSize(true)

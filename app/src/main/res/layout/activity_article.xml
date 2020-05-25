@@ -16,6 +16,14 @@
         android:orientation="vertical"
         tools:context=".ui.article.ArticleActivity">
 
+        <ProgressBar
+            android:id="@+id/pb_article"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rv_article" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_article"
