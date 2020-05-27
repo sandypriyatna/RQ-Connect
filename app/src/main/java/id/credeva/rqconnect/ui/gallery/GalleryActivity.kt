@@ -54,15 +54,15 @@ class GalleryActivity : AppCompatActivity(), KodeinAware, GalleryViewClickListen
             }
         })
 
-        itemsswipetorefresh.setProgressBackgroundColorSchemeColor(
+        swipe_gallery.setProgressBackgroundColorSchemeColor(
             ContextCompat.getColor(
                 this,
                 R.color.colorPrimary
             )
         )
-        itemsswipetorefresh.setColorSchemeColors(Color.WHITE)
+        swipe_gallery.setColorSchemeColors(Color.WHITE)
 
-        itemsswipetorefresh.setOnRefreshListener {
+        swipe_gallery.setOnRefreshListener {
             viewModel.getGallery()
             viewModel.gallery.observe(this, Observer { gallery ->
                 try {
@@ -78,7 +78,7 @@ class GalleryActivity : AppCompatActivity(), KodeinAware, GalleryViewClickListen
                 }
             })
 
-            itemsswipetorefresh.isRefreshing = false
+            swipe_gallery.isRefreshing = false
         }
 
         iv_back.setOnClickListener { onBackPressed() }

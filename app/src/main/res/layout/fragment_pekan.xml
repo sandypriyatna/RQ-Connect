@@ -31,11 +31,18 @@
             android:layout_marginRight="8dp"
             android:text="Data Perkembangan Tahfidz/Hafalan Santri per Pekan" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_pekan"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_pekan"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp" />
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_pekan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 </RelativeLayout>

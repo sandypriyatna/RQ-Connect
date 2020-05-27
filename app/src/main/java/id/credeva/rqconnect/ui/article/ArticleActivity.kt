@@ -1,10 +1,12 @@
 package id.credeva.rqconnect.ui.article
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -46,6 +48,33 @@ class ArticleActivity : AppCompatActivity(), KodeinAware, ArticleViewClickListen
                 Log.v("errorArticle: ", e.message)
             }
         })
+
+        swipe_article.setProgressBackgroundColorSchemeColor(
+            ContextCompat.getColor(
+                this,
+                R.color.colorPrimary
+            )
+        )
+
+        swipe_article.setColorSchemeColors(Color.WHITE)
+
+        swipe_article.setOnRefreshListener {
+            viewModel.getArticle()
+            viewModel.article.observe(this, Observer { article ->
+                try {
+                    pb_article.visibility = View.GONE
+                    rv_article.also {
+                        it.layoutManager = LinearLayoutManager(this)
+                        it.setHasFixedSize(true)
+                        it.adapter = ArticleAdapter(article, this)
+                    }
+                } catch (e: Exception) {
+                    Log.v("errorArticle: ", e.message)
+                }
+            })
+
+            swipe_article.isRefreshing = false
+        }
 
         iv_back.setOnClickListener { onBackPressed() }
     }

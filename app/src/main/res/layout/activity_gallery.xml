@@ -22,7 +22,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/itemsswipetorefresh" />
+            app:layout_constraintTop_toTopOf="@+id/swipe_gallery" />
 
         <ImageView
             android:id="@+id/iv_back"
@@ -34,7 +34,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_arrow_back" />
+            app:srcCompat="@drawable/ic_arrow_back"
+            tools:ignore="VectorDrawableCompat" />
 
         <TextView
             android:id="@+id/textView12"
@@ -51,20 +52,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/itemsswipetorefresh"
+            android:id="@+id/swipe_gallery"
             android:layout_width="wrap_content"
             android:layout_height="0px"
-            android:layout_weight="1"
             android:layout_marginTop="24dp"
+            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_back">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_gallery"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_gallery"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

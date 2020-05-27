@@ -1,11 +1,13 @@
 package id.credeva.rqconnect.ui.tahfidz.pekan
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,6 +56,33 @@ class PekanFragment : Fragment(), KodeinAware {
                 Log.v("errorPekan: ", e.message)
             }
         })
-    }
 
+        swipe_pekan.setProgressBackgroundColorSchemeColor(
+            ContextCompat.getColor(
+                this.requireContext(),
+                R.color.colorPrimary
+            )
+        )
+
+        swipe_pekan.setColorSchemeColors(Color.WHITE)
+
+        swipe_pekan.setOnRefreshListener {
+            viewModel.getPekan()
+            viewModel.pekan.observe(viewLifecycleOwner, Observer { pekan ->
+                try {
+                    pb_pekan.visibility = View.GONE
+                    rv_pekan.also {
+                        it.layoutManager = LinearLayoutManager(requireContext())
+                        it.setHasFixedSize(true)
+                        it.adapter = PekanAdapter(pekan)
+                    }
+                } catch (e: Exception) {
+                    Log.v("errorPekan: ", e.message)
+                }
+            })
+
+            swipe_pekan.isRefreshing = false
+        }
+
+    }
 }

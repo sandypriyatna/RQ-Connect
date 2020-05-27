@@ -43,11 +43,10 @@
             app:layout_constraintStart_toEndOf="@+id/iv_back"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_payment"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:backgroundTint="#F4FAF6"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
@@ -56,93 +55,101 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView21">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="2">
+                android:layout_height="150dp"
+                android:backgroundTint="#F4FAF6">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:weightSum="2">
 
-                    <TextView
-                        android:id="@+id/tv_month"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#219653"
-                        android:layout_marginLeft="16dp"
-                        android:text="Lunas"
-                        android:layout_marginTop="24dp"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_due_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Alhamdulillah SPP sudah terbayar"
-                        android:layout_below="@id/tv_month"
-                        android:layout_marginLeft="16dp"
-                        android:textColor="#219653" />
+                        <TextView
+                            android:id="@+id/tv_month"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="24dp"
+                            android:text="Lunas"
+                            android:textColor="#219653"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tv_due_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_month"
+                            android:layout_marginLeft="16dp"
+                            android:text="Alhamdulillah SPP sudah terbayar"
+                            android:textColor="#219653" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                    </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/tv_ref_key"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="16dp"
-                        android:text="-"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:visibility="gone" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_total_payment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="16dp"
-                        android:text="Jazakumullahu Khairan"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tv_ref_key"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16dp"
+                            android:text="-"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:visibility="gone" />
 
-                    <Button
-                        android:id="@+id/btn_payment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="24dp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tv_total_payment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16dp"
+                            android:text="Jazakumullahu Khairan"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                </RelativeLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                        <Button
+                            android:id="@+id/btn_payment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="24dp"
+                            android:textStyle="bold"
+                            android:visibility="invisible" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_progress_payment"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:backgroundTint="#ffff"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
+            android:backgroundTint="#ffff"
             app:cardCornerRadius="9dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -152,7 +159,7 @@
                 android:id="@+id/pb_payment"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
         </androidx.cardview.widget.CardView>
 
@@ -167,10 +174,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+            app:layout_constraintTop_toBottomOf="@+id/swipe_payment" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_paid_off"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_history_payment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -179,6 +186,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_paid_off"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,11 +1,13 @@
 package id.credeva.rqconnect.ui.tahfidz.lajnah
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,6 +55,33 @@ class LajnahFragment : Fragment(), KodeinAware {
                 Log.v("errorLajnah: ", e.message)
             }
         })
-    }
 
+        swipe_lajnah.setProgressBackgroundColorSchemeColor(
+            ContextCompat.getColor(
+                this.requireContext(),
+                R.color.colorPrimary
+            )
+        )
+
+        swipe_lajnah.setColorSchemeColors(Color.WHITE)
+
+        swipe_lajnah.setOnRefreshListener {
+            viewModel.getLajnah()
+            viewModel.lajnah.observe(viewLifecycleOwner, Observer { lajnah ->
+                try {
+                    pb_lajnah.visibility = View.GONE
+                    rv_lajnah.also {
+                        it.layoutManager = LinearLayoutManager(requireContext())
+                        it.setHasFixedSize(true)
+                        it.adapter = LajnahAdapter(lajnah)
+                    }
+                } catch (e: Exception) {
+                    Log.v("errorLajnah: ", e.message)
+                }
+            })
+
+            swipe_lajnah.isRefreshing = false
+        }
+
+    }
 }
