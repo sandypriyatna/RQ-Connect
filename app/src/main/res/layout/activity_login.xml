@@ -20,12 +20,13 @@
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="260dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_ilustrasi_login" />
+            app:srcCompat="@drawable/ic_ilustrasi_login"
+            tools:ignore="VectorDrawableCompat" />
 
         <TextView
             android:id="@+id/textView"
@@ -47,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:text="NIS"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -59,7 +60,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="18dp"
             android:text="Silahkan login terlebih dahulu yaa.."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -130,8 +130,8 @@
             android:id="@+id/materialButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/btn_round"
@@ -149,8 +149,8 @@
             android:id="@+id/progress_bar_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             android:textStyle="bold"
