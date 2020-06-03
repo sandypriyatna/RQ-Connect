@@ -19,24 +19,23 @@ class ConfirmViewModel(
 
     var confirmListener: ConfirmListener? = null
 
-    fun sendData(imagePath: String) {
-        confirmListener?.onStarted()
+    fun getPayment() = repository
 
+    fun onPaymentClick(imagePath: String) {
+        confirmListener?.onStarted()
         val idPayment =
             RequestBody.create("text/plain".toMediaTypeOrNull(), prefManager.spPaymentId.toString())
 
         Coroutines.main {
             try {
-                confirmListener?.onSucces()
                 val detectionResponse =
                     repository.confirmResponse(idPayment, createMultiPart(imagePath))
-
-                detectionResponse.let {
+                detectionResponse.message?.let {
+                    confirmListener?.onSucces()
                     return@main
                 }
             } catch (e: ApiException) {
-                Log.v("apiError", e.message!!)
-                confirmListener?.onFailure(e.message)
+                confirmListener?.onFailure(e.message!!)
             } catch (e: NoInternetException) {
                 confirmListener?.onFailure(e.message!!)
             }

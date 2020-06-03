@@ -47,12 +47,13 @@ interface MyApi {
     @GET("gallery/image/{id}")
     suspend fun getDetailGallery(@Path("id") id: Int): Response<GalleryDetailResponse>
 
+    @Headers("Accept: application/json")
     @Multipart
     @POST("payment")
     suspend fun storePayment(
         @Part("id") id: RequestBody?,
         @Part evidence: MultipartBody.Part
-    ): Response<ResponseBody>
+    ): Response<ConfirmationResponse>
 
     @Headers("Accept: application/json")
     @FormUrlEncoded

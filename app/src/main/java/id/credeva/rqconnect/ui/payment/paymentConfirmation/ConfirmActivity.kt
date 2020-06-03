@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -114,10 +115,9 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
 
         btn_confirm.setOnClickListener {
             if (finalPath != null) {
-                viewModel.sendData(finalPath!!)
+                viewModel.onPaymentClick(finalPath!!)
                 viewModelDeposit.sendDeposit()
                 viewModelInfaq.sendInfaq()
-                prefManager.spStatusPayment = "active"
             } else {
                 this.toast(getString(R.string.empty_image))
             }
@@ -239,6 +239,7 @@ class ConfirmActivity : AppCompatActivity(), KodeinAware,
     override fun onSucces() {
         this.cl_confirm.visibility = View.GONE
         this.ll_success_payment.visibility = View.VISIBLE
+        prefManager.spStatusPayment = "active"
 
         Handler().postDelayed(
             {
