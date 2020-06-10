@@ -58,7 +58,7 @@ class RqconnectApplication : Application(), KodeinAware {
         bind() from provider { DepositViewModelFactory(instance()) }
         bind() from provider { InfaqViewModelFactory(instance()) }
         bind() from provider { GalleryDetailViewModelFactory(instance()) }
-        bind() from provider { PembayaranViewModelFactory(instance(), instance()) }
+        bind() from provider { PembayaranViewModelFactory(instance(), instance(), instance()) }
         bind() from provider {
             PilihPembayaranViewModelFactory(
                 instance()

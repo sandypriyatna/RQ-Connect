@@ -30,6 +30,7 @@ import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.log
 
 class PembayaranActivity : AppCompatActivity(), KodeinAware, PaidViewClickListener {
 
@@ -45,9 +46,60 @@ class PembayaranActivity : AppCompatActivity(), KodeinAware, PaidViewClickListen
 
         binding.viewmodel = viewModel
 
+        viewModel.getLate()
         viewModel.getRemain()
         viewModel.getPaidOff()
+
         prefManager.spStatusPayment = null
+
+        viewModel.late.observe(this, Observer { late ->
+            try {
+                cv_progress_payment.visibility = View.GONE
+                tv_total_payment.text = "Rp. " + late[0].price
+                tv_due_date.text = late[0].validBefore
+                tv_ref_key.text = late[0].refKey
+
+                val statusPayment = late[0].evidence
+
+                if (statusPayment == null) {
+                    btn_payment.text = "Pembayaran Telat"
+                    tv_month.setTextColor(Color.parseColor("#FF000000"))
+                    tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
+                    cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                    btn_payment.visibility = View.VISIBLE
+                    btn_payment.setBackgroundColor(Color.parseColor("#FF850000"))
+                } else if (statusPayment != null) {
+                    btn_payment.text = "Lihat Bukti"
+                    tv_month.setTextColor(Color.parseColor("#FF000000"))
+                    tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
+                    cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                    btn_payment.visibility = View.VISIBLE
+                    prefManager.spStatusPayment = "active"
+                }
+
+                val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                val date: Date = format.parse(late[0].validBefore.toString())
+
+                val dateString =
+                    DateFormat.format("dd", date) as String
+                val monthString =
+                    DateFormat.format("MMM", date) as String
+                val yearString =
+                    DateFormat.format("yyyy", date) as String
+
+                tv_month.text = "Pembayaran bulan ${monthString} "
+                tv_due_date.text = "Tenggat pembayaran ${dateString} ${monthString} ${yearString}"
+
+                prefManager.spPaymentId = late[0].id.toString()
+                prefManager.spRefKey = late[0].refKey
+                prefManager.spSppTotal = late[0].price.toInt()
+                prefManager.spDueDatePay = late[0].validBefore
+                prefManager.spEvidence = late[0].evidence.toString()
+
+            } catch (e: Exception) {
+                Log.e("errorPembayaranLate", e.message.toString())
+            }
+        })
 
         viewModel.remain.observe(this, Observer { remain ->
             try {
@@ -55,6 +107,23 @@ class PembayaranActivity : AppCompatActivity(), KodeinAware, PaidViewClickListen
                 tv_total_payment.text = "Rp. " + remain[0].price
                 tv_due_date.text = remain[0].validBefore
                 tv_ref_key.text = remain[0].refKey
+
+                val statusPayment = remain[0].evidence
+
+                if (statusPayment == null) {
+                    btn_payment.text = "Bayar"
+                    tv_month.setTextColor(Color.parseColor("#FF000000"))
+                    tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
+                    cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                    btn_payment.visibility = View.VISIBLE
+                } else if (statusPayment != null) {
+                    btn_payment.text = "Lihat Bukti"
+                    tv_month.setTextColor(Color.parseColor("#FF000000"))
+                    tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
+                    cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                    btn_payment.visibility = View.VISIBLE
+                    prefManager.spStatusPayment = "active"
+                }
 
                 val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                 val date: Date = format.parse(remain[0].validBefore.toString())
@@ -75,25 +144,8 @@ class PembayaranActivity : AppCompatActivity(), KodeinAware, PaidViewClickListen
                 prefManager.spDueDatePay = remain[0].validBefore
                 prefManager.spEvidence = remain[0].evidence.toString()
 
-                val statusPayment = remain[0].evidence
-
-                if (statusPayment == null) {
-                    btn_payment.text = "Bayar"
-                    tv_month.setTextColor(Color.parseColor("#FF000000"))
-                    tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
-                    cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
-                    btn_payment.visibility = View.VISIBLE
-                } else if (statusPayment != null) {
-                    btn_payment.text = "Lihat Bukti"
-                    tv_month.setTextColor(Color.parseColor("#FF000000"))
-                    tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
-                    cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
-                    btn_payment.visibility = View.VISIBLE
-                    prefManager.spStatusPayment = "active"
-                }
-
             } catch (e: Exception) {
-                Log.e("errorPembayaran", e.message.toString())
+                Log.e("errorPembayaranRemain", e.message.toString())
             }
         })
 
@@ -108,6 +160,8 @@ class PembayaranActivity : AppCompatActivity(), KodeinAware, PaidViewClickListen
         btn_payment.setOnClickListener {
             if (btn_payment.text.equals("Bayar")) {
                 startActivity(Intent(this, PilihPembayaranActivity::class.java))
+            } else if (btn_payment.text.equals("Pembayaran Telat")) {
+                toast("Maaf, pembayaran anda telat. Hubungi admin untuk melanjutkan")
             } else {
                 startActivity(Intent(this, BuktiPembayaranActivity::class.java))
             }
@@ -123,6 +177,56 @@ class PembayaranActivity : AppCompatActivity(), KodeinAware, PaidViewClickListen
         swipe_payment.setColorSchemeColors(Color.WHITE)
 
         swipe_payment.setOnRefreshListener {
+            viewModel.getLate()
+            viewModel.late.observe(this, Observer { late ->
+                try {
+                    cv_progress_payment.visibility = View.GONE
+                    tv_total_payment.text = "Rp. " + late[0].price
+                    tv_due_date.text = late[0].validBefore
+                    tv_ref_key.text = late[0].refKey
+
+                    val statusPayment = late[0].evidence
+
+                    if (statusPayment == null) {
+                        btn_payment.text = "Pembayaran Telat"
+                        tv_month.setTextColor(Color.parseColor("#FF000000"))
+                        tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
+                        cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                        btn_payment.visibility = View.VISIBLE
+                    } else if (statusPayment != null) {
+                        btn_payment.text = "Lihat Bukti"
+                        tv_month.setTextColor(Color.parseColor("#FF000000"))
+                        tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
+                        cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                        btn_payment.visibility = View.VISIBLE
+                        prefManager.spStatusPayment = "active"
+                    }
+
+                    val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                    val date: Date = format.parse(late[0].validBefore.toString())
+
+                    val dateString =
+                        DateFormat.format("dd", date) as String
+                    val monthString =
+                        DateFormat.format("MMM", date) as String
+                    val yearString =
+                        DateFormat.format("yyyy", date) as String
+
+                    tv_month.text = "Pembayaran bulan ${monthString} "
+                    tv_due_date.text =
+                        "Tenggat pembayaran ${dateString} ${monthString} ${yearString}"
+
+                    prefManager.spPaymentId = late[0].id.toString()
+                    prefManager.spRefKey = late[0].refKey
+                    prefManager.spSppTotal = late[0].price!!.toInt()
+                    prefManager.spDueDatePay = late[0].validBefore
+                    prefManager.spEvidence = late[0].evidence.toString()
+
+                } catch (e: Exception) {
+                    Log.e("errorPembayaranLate", e.message.toString())
+                }
+            })
+
             viewModel.getRemain()
             viewModel.remain.observe(this, Observer { remain ->
                 try {
@@ -130,6 +234,24 @@ class PembayaranActivity : AppCompatActivity(), KodeinAware, PaidViewClickListen
                     tv_total_payment.text = "Rp. " + remain[0].price
                     tv_due_date.text = remain[0].validBefore
                     tv_ref_key.text = remain[0].refKey
+
+                    val statusPayment = remain[0].evidence
+
+                    if (statusPayment == null) {
+                        btn_payment.text = "Bayar"
+                        tv_month.setTextColor(Color.parseColor("#FF000000"))
+                        tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
+                        cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                        btn_payment.visibility = View.VISIBLE
+                        btn_payment.setBackgroundColor(Color.parseColor("#A5C546"))
+                    } else if (statusPayment != null) {
+                        btn_payment.text = "Lihat Bukti"
+                        tv_month.setTextColor(Color.parseColor("#FF000000"))
+                        tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
+                        cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                        btn_payment.visibility = View.VISIBLE
+                        prefManager.spStatusPayment = "active"
+                    }
 
                     val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                     val date: Date = format.parse(remain[0].validBefore.toString())
@@ -151,25 +273,8 @@ class PembayaranActivity : AppCompatActivity(), KodeinAware, PaidViewClickListen
                     prefManager.spDueDatePay = remain[0].validBefore
                     prefManager.spEvidence = remain[0].evidence.toString()
 
-                    val statusPayment = remain[0].evidence
-
-                    if (statusPayment == null) {
-                        btn_payment.text = "Bayar"
-                        tv_month.setTextColor(Color.parseColor("#FF000000"))
-                        tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
-                        cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
-                        btn_payment.visibility = View.VISIBLE
-                    } else if (statusPayment != null) {
-                        btn_payment.text = "Lihat Bukti"
-                        tv_month.setTextColor(Color.parseColor("#FF000000"))
-                        tv_due_date.setTextColor(Color.parseColor("#FFFF4444"))
-                        cardView.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
-                        btn_payment.visibility = View.VISIBLE
-                        prefManager.spStatusPayment = "active"
-                    }
-
                 } catch (e: Exception) {
-                    Log.e("errorPembayaran", e.message.toString())
+                    Log.e("errorPembayaranRemain", e.message.toString())
                 }
             })
             swipe_payment.isRefreshing = false

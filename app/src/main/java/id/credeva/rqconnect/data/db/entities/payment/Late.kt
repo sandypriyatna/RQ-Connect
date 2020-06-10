@@ -6,22 +6,22 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class Late(
     @SerializedName("created_at")
-    val created_at: String,
+    val createdAt: String,
     @SerializedName("evidence")
     val evidence: Any,
     @SerializedName("id")
     val id: Int,
     @SerializedName("member_id")
-    val member_id: String,
+    val memberId: String,
     @SerializedName("price")
     val price: String,
     @SerializedName("ref_key")
-    val ref_key: String,
+    val refKey: String,
     @SerializedName("status")
     val status: String,
     @SerializedName("updated_at")
-    val updated_at: String,
+    val updatedAt: String,
     @SerializedName("valid_before")
-    val valid_before: String
+    val validBefore: String
 )
 
